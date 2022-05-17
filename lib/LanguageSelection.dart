@@ -1,22 +1,16 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LanguageSelection extends StatefulWidget {
   @override
   _LanguageSelectionState createState() => _LanguageSelectionState();
 }
 
-//enum Menu { language1, language2, language3 }
+enum Menu { language1, language2, language3 }
 
 class _LanguageSelectionState extends State<LanguageSelection> {
   var _selectedlanguage = "English"; // english
   bool _isChecked = false;
-  List<String> lanArray = ["English", "日本語", "中文（繁體）"];
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +22,27 @@ class _LanguageSelectionState extends State<LanguageSelection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.fromLTRB(127, 119, 133, 0),
                   child: PopupMenuButton(
-                    onSelected: (item) {
+                    onSelected: (Menu item) {
                       setState(() {
-                        _selectedlanguage = item;
+                        if (item.name == Menu.language1)
+                          _selectedlanguage = "English";
+                        else if (item.name == Menu.language2)
+                          _selectedlanguage = "日本語";
+                        else
+                          _selectedlanguage = "中文（繁體）";
                       });
                     },
                     itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
+                    <PopupMenuEntry<Menu>>[
                       const PopupMenuItem(
                         child: Text("Choose your language"),
                         enabled: false,
                       ),
                       const PopupMenuItem(
                         child: Text("English"),
-                        value: lanArray.elementAt(0),
+                        value: Menu.language1,
                       ),
                       const PopupMenuItem(
                           child: Text("日本語"), value: Menu.language2),
@@ -56,6 +55,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                         Icon(Icons.keyboard_arrow_down),
                       ],
                     ),
+
                     initialValue: Menu.language1,
                   ),
                 ),
