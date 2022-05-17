@@ -26,9 +26,9 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                   child: PopupMenuButton(
                     onSelected: (Menu item) {
                       setState(() {
-                        if (item.name == Menu.language1)
+                        if (item.name == Menu.language1.name)
                           _selectedlanguage = "English";
-                        else if (item.name == Menu.language2)
+                        else if (item.name == Menu.language2.name)
                           _selectedlanguage = "日本語";
                         else
                           _selectedlanguage = "中文（繁體）";
